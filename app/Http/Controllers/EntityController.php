@@ -10,7 +10,7 @@ class EntityController extends Controller
     //index form
     public function index(){
         return view('user.index',[
-            'entities'=>Entity::paginate(50)
+            'entities'=>Entity::paginate(5)
         ]);
     }
     //view create form
@@ -18,7 +18,7 @@ class EntityController extends Controller
         return view('user.create');
     }
 
-    //store post for admin
+    //store info for admin
     public function store(){
         $attributes = request()->validate([
             'first_name' => 'required',
@@ -35,6 +35,7 @@ class EntityController extends Controller
         return view('user.edit', ['entity'=>$entity]);
     }
 
+    //update info
     public function update(Entity $entity)
     {
         $attributes = request()->validate([
@@ -49,5 +50,10 @@ class EntityController extends Controller
         return redirect('/dashboard');
     }
 
+    //delete info
+     public function destroy(Entity $entity){
+        $entity->delete();
+        return redirect('/dashboard');
+    }
 
 }

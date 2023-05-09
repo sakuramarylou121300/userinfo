@@ -30,9 +30,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // this is mine
+// Route::get('/dashboard', [EntityController::class, 'index']);
 Route::get('user/entities/home', [EntityController::class, 'index']);
 Route::get('user/entities/create', [EntityController::class, 'create']);
 Route::post('user/entities', [EntityController::class, 'store']);
 Route::get('user/entities/{entity}/edit', [EntityController::class, 'edit']);
 Route::patch('user/entities/{entity}', [EntityController::class, 'update']);
+Route::delete('user/entities/{entity}', [EntityController::class, 'destroy']);
 require __DIR__.'/auth.php';

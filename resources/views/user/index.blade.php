@@ -12,12 +12,23 @@
                     </div>
                 </div>
             </td>
-
+            {{-- redirect to edit form --}}
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <a href="/user/entities/{{$entity->id}}/edit" class="text-blue-500 hover:text-blue-600">
                     Edit
                 </a>
             </td>
+
+            {{-- delete info --}}
+            {{-- this is for delete --}}
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                {{-- this is a form because it needs an action --}}
+                <form method="POST" action="/user/entities/{{$entity->id}}">
+                    @csrf
+                    @method('DELETE')
+
+                    <button>Delete</button>
+                </form>
 
         </tr>
     @endforeach
