@@ -5,15 +5,20 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('user.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{-- i removed the dashboard --}}
+                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link> --}}
+                    {{-- link for user info --}}
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('usertry.index')">
+                        {{ __('User Information') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -34,19 +39,27 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        {{-- drop down for create user --}}
+                        <x-dropdown-link :href="route('user.create')">
+                                {{ __('Create User Information') }}
+                        </x-dropdown-link>
+
+                        {{-- drop down for profile edit --}}
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('My Profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
+                            {{-- this is dropdown for log out --}}
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
+
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -80,6 +93,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                {{-- mobile - create user info --}}
+                <x-dropdown-link :href="route('user.create')">
+                    {{ __('Create User Information') }}
+                </x-dropdown-link>
+
+                {{-- mobile my - my profile --}}
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

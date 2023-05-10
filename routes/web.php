@@ -29,12 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// this is mine
-// Route::get('/dashboard', [EntityController::class, 'index']);
-Route::get('user/entities/home', [EntityController::class, 'index']);
-Route::get('user/entities/create', [EntityController::class, 'create']);
-Route::post('user/entities', [EntityController::class, 'store']);
-Route::get('user/entities/{entity}/edit', [EntityController::class, 'edit']);
-Route::patch('user/entities/{entity}', [EntityController::class, 'update']);
-Route::delete('user/entities/{entity}', [EntityController::class, 'destroy']);
+//this is mine
+Route::get('user/entities/create', [EntityController::class, 'create'])->name('user.create')->middleware('auth');
+Route::post('user/entities', [EntityController::class, 'store'])->middleware('auth');
+Route::get('user/entities/home', [EntityController::class, 'index'])->name('user.index')->middleware('auth');
+Route::get('user/entities/{entity}/edit', [EntityController::class, 'edit'])->name('user.update')->middleware('auth');
+Route::patch('user/entities/{entity}', [EntityController::class, 'update'])->middleware('auth');
+Route::delete('user/entities/{entity}', [EntityController::class, 'destroy'])->name('user.destroy')->middleware('auth');
+
 require __DIR__.'/auth.php';
